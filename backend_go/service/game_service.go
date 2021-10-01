@@ -1,5 +1,10 @@
 package service
 
+import (
+	"math/rand"
+)
+
+
 var numbers []int
 
 func init() {
@@ -15,5 +20,7 @@ func ResetNumber()  {
 
 // RandNumber ランダムで番号を付与する
 func RandNumber() int {
-	return 0
+	var num int 
+	num = rand.Intn(99) +1
+	return num
 }

@@ -31,6 +31,11 @@ class Game extends React.Component {
         if (self.state.userId === data.id) {
           // 2 stateの更新
           // stateを更新し、画面を描画する
+          this.setState({
+            userId: data.user_id,
+            myNumber: data.number,
+            userName: data.user_name
+          });
         }
         // 数字を発表した場合
       } else if (data.type === 1) {
@@ -67,6 +72,7 @@ class Game extends React.Component {
     self.state.isSend = true
     // 4-1
     // バックエンドに自分の数字（stateのmyNumber）を送信する
+    self.state.myNumber;
   }
 
   render() {

@@ -8,7 +8,7 @@ class StartGame extends React.Component {
       <div>
         <h1>ito</h1>
         <button>{/* 1　inputName.jsの画面に遷移する */}
-          start game
+         <Link to='/input-name'>start game</Link>
         </button>
       </div>
     );

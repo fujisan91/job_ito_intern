@@ -78,11 +78,23 @@ func handleWebSocket(c echo.Context) error {
 				// 問題3
 				// requestの中からお題を取得し、現在のお題を保持する。
 				// またみんなにお題と、タイプを返却する。
+				var theme = request.Odai
+				var type = request.Type
+
+				return theme, type
 			case model.TypeNumber:
 				// 問題2
 				// リクエストのユーザーIDが一致する対象のユーザーの番号を更新する。
 				// また、対象のユーザーを選択済みユーザーとしてユーザーの情報を保持しておく
 				// その後はユーザーIDと更新された番号、選択済みユーザーのリスト情報を返却する
+				var currentUser User.model
+
+				for i:=0; i<len(Users); i++ {
+					if Users[i].UserID == request.UserID {
+						currentUser = Users[i]
+
+					}
+				}
 			case model.TypeUser:
 				// 問題1
 				// ユーザーを新規作成する。
@@ -91,6 +103,13 @@ func handleWebSocket(c echo.Context) error {
 				// またその際にランダムな数字（既に作成済みのユーザーと被らないよう制御する）を発行し
 				// 作成したUserModelに設定する。
 				// その後はUsers（UserModelのリスト）に作成したUserModelを追加する
+				type User const{
+					Id int `json:"id"`
+					// ユーザー名
+					UserName string `json:"user_name"`
+					// ユーザーの番号
+					Number int `json:"number"`
+				}
 			}
 			// Client からのメッセージを元に返すメッセージを作成し送信する
 			err = sendMessageToAllPool(*response)
@@ -140,6 +159,11 @@ func TestMethod() echo.HandlerFunc {
 func GameReset() echo.HandlerFunc {
 	// 問題4
 	// 保持しているUsers、Game、IDの番号、既に番号した番号をリセットする。
+	Type=0,
+	UserID=0,
+	UserName="",
+	Number=0,
+	Odai="",
 	return func(context echo.Context) error {
 		return context.String(http.StatusOK, "OK")
 	}
